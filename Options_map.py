@@ -1,3 +1,16 @@
+"""
+Quantitative Volatility Tool for Delta Hedging
+
+Volatility Surface Modeling: Scrapes option chains, constructs an Implied Volatility (IV) 
+surface using RBF interpolation, and prices options using the Black-Scholes-Merton model.
+
+This tool automates the extraction of the risk-free rate from Treasury yields and 
+provides a framework for strategy risk-profiling and delta-neutral analysis.
+
+Author: ben-245dev
+Dependencies: yfinance, pandas, numpy, matplotlib, scipy
+"""
+
 import yfinance as yf
 import pandas as pd
 import numpy as np
@@ -11,7 +24,7 @@ import logging
 # Configuration
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 
-class AlphaStationPro:
+class Station:
     def __init__(self, ticker_symbol):
         self.ticker_symbol = ticker_symbol
         self.ticker = yf.Ticker(ticker_symbol)
@@ -97,7 +110,7 @@ class AlphaStationPro:
 
 # --- RUN ---
 if __name__ == "__main__":
-    engine = AlphaStationPro("SPY")
+    engine = Station("SPY")
     engine.build_engine()
     
     # Example: Estimate a 30-day (0.08Y) ATM Put
